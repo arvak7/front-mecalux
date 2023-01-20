@@ -1,0 +1,31 @@
+<div style="height: 100%;">
+    <div style="height: 15%; width: 100%; background-color: #2196f3;">
+      <div style="display: flex; justify-content: space-around; align-items: center; height: 100%;">
+        <a routerLink="/warehouse" routerLinkActive="active" class="menu-item">Warehouse</a>
+        <a routerLink="/racks" routerLinkActive="active" class="menu-item">Racks</a>
+        <a routerLink="/permutations" routerLinkActive="active" class="menu-item">Permutations</a>
+      </div>
+    </div>
+    <div style="height: 85%; width: 100%;">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
+  <style>
+    .menu-item {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      padding: 10px;
+    }
+  
+    .menu-item:hover {
+      background-color: #1e88e5;
+      cursor: pointer;
+    }
+  
+    .menu-item.active {
+      background-color: #1565c0;
+    }
+  </style>
+  

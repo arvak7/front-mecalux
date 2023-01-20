@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "front-mecalux"
+  "defaultProject": "front-mecalux",
+  "cli": {
+    "analytics": false
+  }
 }
