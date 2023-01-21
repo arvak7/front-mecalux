@@ -5,5 +5,7 @@ export interface Warehouse {
   uuid: string,
   family: string,
   size: number,
-  Racks: Array<Rack>
+  racks: Array<Rack>,
+  rackss: string,
+  isHighlighted: boolean
 }
