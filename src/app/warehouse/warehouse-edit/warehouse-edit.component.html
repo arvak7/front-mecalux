@@ -44,7 +44,7 @@
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (matChipInputTokenEnd)="add($event)">
-                <mat-error *ngIf="errors.required">You have more rakcs than the max size.</mat-error>
+                <mat-error *ngIf="errors.required">You have more racks than the max size.</mat-error>
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
               <mat-option *ngFor="let rack of filteredRacks | async" [value]="rack">

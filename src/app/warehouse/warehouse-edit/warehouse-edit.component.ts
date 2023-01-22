@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { Rack } from 'src/app/shared/models/rack.model';
+
 
 
 @Component({

@@ -1,1 +1,36 @@
-<p>rack works!</p>
+<form (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>Add Rack</h1>
+    <div
+        style="display: flex;flex-direction: column; margin:0rem auto; max-width: 600px; padding: 0rem; align-items: center;">       
+        
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Family</mat-label>
+            <mat-select [(ngModel)]="warehouse.familySelectedValue" (selectionChange)="onFamilySelected()" name="family" required>
+                <mat-option [value]="''"><span style="color: grey;">select an option</span></mat-option>
+                <mat-option *ngFor="let family of families" [value]="family">
+                    {{family}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="errors.required">Family is required.</mat-error>
+        </mat-form-field>       
+        
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Rack</mat-label>
+            <mat-select [(ngModel)]="newRack.type" (selectionChange)="onFamilySelected()" name="rack" required>
+                <mat-option [value]="''"><span style="color: grey;">select an option</span></mat-option>
+                <mat-option *ngFor="let rack of allRacks" [value]="rack">
+                    {{rack}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="errors.required">Rack is required.</mat-error>
+        </mat-form-field>
+    </div>    
+
+    <div
+        style="display: flex;flex-direction: row; margin:0rem auto; max-width: 600px; padding: 5.5rem; align-items: center; padding-top: 0cm; padding-bottom: 0cm;">        
+        <button mat-raised-button class="my-button" type="submit" [color]="colorCreate" (mouseover)="colorCreate = 'accent'" (mouseout)="colorCreate = 'primary'">Update</button>
+        <mat-error *ngIf="errors.required">We have more Racks that the Warehouse size allow.</mat-error>
+        <button mat-raised-button class="my-button" type="button" [color]="colorCancel" (mouseover)="colorCancel = 'accent'" (mouseout)="colorCancel = 'primary'" (click)="cancel()">Cancel</button>
+    </div>
+    
+</form>

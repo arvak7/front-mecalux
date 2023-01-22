@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { NewWarehouse } from './new-warehouse';
 import { MatDialog } from '@angular/material/dialog';
 import { WarehouseEditComponent } from './warehouse-edit/warehouse-edit.component';
+import { RackComponent } from '../rack/rack.component';
 
 
 
@@ -59,6 +60,12 @@ export class WarehouseComponent implements OnInit {
   create() {
     const dialogo1 = this.dialog.open(WarehouseNewComponent, {
       data: new NewWarehouse()
+    });
+  }
+
+  addRack(element: Warehouse) {    
+    const dialogo1 = this.dialog.open(RackComponent, {
+      data: element
     });
   }
 
