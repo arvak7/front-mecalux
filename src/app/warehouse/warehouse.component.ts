@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Warehouse } from '../shared/models/warehouse.model';
 import { WarehouseService } from '../shared/services/warehouse/warehouse.service';
+import { WarehouseNewComponent } from './warehouse-new/warehouse-new.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { NewWarehouse } from './new-warehouse';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -13,10 +16,11 @@ import { MatSort } from '@angular/material/sort';
 })
 export class WarehouseComponent implements OnInit {
 
+  
   displayedColumns: string[] = ['client', 'family', 'size', 'racks', 'actions'];
   dataSource = new MatTableDataSource<Warehouse>([]);
 
-  constructor(private warehouseService: WarehouseService) { }
+  constructor(private warehouseService: WarehouseService, public dialog: MatDialog) { }
 
   @ViewChild('empTbSort') empTbSort = new MatSort();
 
@@ -52,11 +56,10 @@ export class WarehouseComponent implements OnInit {
   }
 
   create() {
-    console.log("Create new warehouse");
-    // implementar la lógica de creación aquí
+    const dialogo1 = this.dialog.open(WarehouseNewComponent, {
+      data: new NewWarehouse()
+    });
   }
-
-
 
 }
 
