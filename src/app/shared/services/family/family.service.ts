@@ -15,7 +15,7 @@ export class FamilyService {
     return this.http.get(`api/v1/families`);
   }
 
-  public fetchByFamily(family: string): Observable<string[]> {
-    return this.http.get(`api/v1/families/${family}/racks`);
+  public fetchByFamily(family: string): Promise<string[]> {
+    return this.http.get(`api/v1/families/${family}/racks`).toPromise();
   }
 }

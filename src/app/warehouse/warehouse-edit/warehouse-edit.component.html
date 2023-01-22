@@ -1,0 +1,68 @@
+<form (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>Edit Warehouse</h1>
+    <div
+        style="display: flex;flex-direction: column; margin:0rem auto; max-width: 600px; padding: 0rem; align-items: center;">
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Uuid</mat-label>
+            <input matInput value="" [(ngModel)]="warehouse.uuid" name="uuid"
+                readonly>
+            <mat-error *ngIf="errors.required">Client is required.</mat-error>
+        </mat-form-field>  
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Warehouse client</mat-label>
+            <input matInput placeholder="Ex. Mercadona" value="" [(ngModel)]="warehouse.client" name="client"
+                required>
+            <mat-error *ngIf="errors.required">Client is required.</mat-error>
+        </mat-form-field>         
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Family</mat-label>
+            <mat-select [(ngModel)]="warehouse.familySelectedValue" (selectionChange)="onFamilySelected()" name="family" required>
+                <mat-option [value]="''"><span style="color: grey;">select an option</span></mat-option>
+                <mat-option *ngFor="let family of families" [value]="family">
+                    {{family}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="errors.required">Family is required.</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="example-chip-list">
+            <mat-label>Add racks</mat-label>
+            <mat-chip-list #chipList aria-label="Racks selection">
+              <mat-chip
+                *ngFor="let rack of racks"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(rack)">
+                {{rack}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                placeholder="New Rack..."
+                #rackInput
+                [formControl]="rackCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+                <mat-error *ngIf="errors.required">You have more rakcs than the max size.</mat-error>
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+              <mat-option *ngFor="let rack of filteredRacks | async" [value]="rack">
+                {{rack}}
+              </mat-option>
+            </mat-autocomplete>            
+          </mat-form-field>
+
+        <mat-form-field style="max-width: 110px; padding: 1rem;">
+            <input matInput [(ngModel)]="warehouse.size" type="number" placeholder="Max size"
+                name="size">
+        </mat-form-field>               
+    </div>    
+
+    <div
+        style="display: flex;flex-direction: row; margin:0rem auto; max-width: 600px; padding: 5.5rem; align-items: center; padding-top: 0cm; padding-bottom: 0cm;">        
+        <button mat-raised-button class="my-button" type="submit" [color]="colorCreate" (mouseover)="colorCreate = 'accent'" (mouseout)="colorCreate = 'primary'">Update</button>
+        <button mat-raised-button class="my-button" type="button" [color]="colorCancel" (mouseover)="colorCancel = 'accent'" (mouseout)="colorCancel = 'primary'" (click)="cancel()">Cancel</button>
+    </div>
+    
+</form>

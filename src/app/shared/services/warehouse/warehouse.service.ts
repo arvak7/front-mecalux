@@ -22,4 +22,12 @@ export class WarehouseService {
   public save(data: Warehouse): Observable<Warehouse> {
     return this.http.post('api/v1/warehouses', data)
   } 
+
+  public update(data: Warehouse): Observable<Warehouse> {
+    return this.http.put('api/v1/warehouses', data)
+  } 
+
+  public delete(uuid: string): Observable<Warehouse> {
+    return this.http.delete(`api/v1/warehouses/${uuid}`)
+  } 
 }

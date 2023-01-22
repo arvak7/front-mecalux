@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
+import { WarehouseEditComponent } from './warehouse/warehouse-edit/warehouse-edit.component';
 
 
 
@@ -33,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RackComponent,
     PermutationsComponent,
     NavigationComponent,
-    WarehouseNewComponent
+    WarehouseNewComponent,
+    WarehouseEditComponent
   ],
   imports: [
     BrowserModule,

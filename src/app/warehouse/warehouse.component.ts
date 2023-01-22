@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { NewWarehouse } from './new-warehouse';
 import { MatDialog } from '@angular/material/dialog';
+import { WarehouseEditComponent } from './warehouse-edit/warehouse-edit.component';
 
 
 
@@ -45,14 +46,14 @@ export class WarehouseComponent implements OnInit {
     row.isHighlighted = false;
   }
 
-  edit(element: Warehouse) {
-    console.log("Edit: ", element);
-    // implementar la lógica de edición aquí
+  edit(element: Warehouse) {    
+    const dialogo1 = this.dialog.open(WarehouseEditComponent, {
+      data: element
+    });
   }
 
-  delete(element: Warehouse) {
-    console.log("Delete: ", element);
-    // implementar la lógica de eliminación aquí
+  delete(element: Warehouse) {    
+    this.warehouseService.delete(element.uuid).subscribe();
   }
 
   create() {

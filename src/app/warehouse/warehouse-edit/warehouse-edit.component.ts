@@ -10,13 +10,16 @@ import { FormControl } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { Rack } from 'src/app/shared/models/rack.model';
+
 
 @Component({
-  selector: 'app-warehouse-new',
-  templateUrl: './warehouse-new.component.html',
-  styleUrls: ['./warehouse-new.component.css']
+  selector: 'app-warehouse-edit',
+  templateUrl: './warehouse-edit.component.html',
+  styleUrls: ['./warehouse-edit.component.css']
 })
-export class WarehouseNewComponent implements OnInit {
+export class WarehouseEditComponent implements OnInit {
+
 
   visible = true;
   selectable = true;
@@ -50,15 +53,22 @@ export class WarehouseNewComponent implements OnInit {
 
   } as Warehouse
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: NewWarehouse, private familyService: FamilyService,
-    public dialogRef: MatDialogRef<WarehouseNewComponent>, private warehouseService: WarehouseService) {      
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Warehouse, private familyService: FamilyService,
+    public dialogRef: MatDialogRef<WarehouseEditComponent>, private warehouseService: WarehouseService) {
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit', this.warehouse)
+    console.log('ngOnInit', this.data)
+    this.warehouse = this.data;
+    this.warehouse.familySelectedValue = this.data.family;     
     this.familyService.fetchAll().subscribe(data => {
       this.families = data;
-    });
+    });   
+    this.onFamilySelected()  
+    this.racks = this.data.racks.map(r => r.type);
   }
+  
 
   onSubmit() {
     this.errors.required = '';
@@ -66,15 +76,14 @@ export class WarehouseNewComponent implements OnInit {
       return this.errors.required = 'error requerido';
     }
     this.warehouse.family = this.warehouse.familySelectedValue
-    this.warehouse.racks = this.racks
-    this.warehouseService.save(this.warehouse).subscribe(res => { this.dialogRef.close() });
+    this.warehouse.racks = this.racks;
+    this.warehouseService.update(this.warehouse).subscribe(res => { this.dialogRef.close() });
     return;
   }
 
   cancel() {
     this.dialogRef.close();
   }
-
 
   async onFamilySelected() {
     try {
@@ -124,5 +133,6 @@ export class WarehouseNewComponent implements OnInit {
 
     return this.allRacks.filter(rack => rack.toLowerCase().indexOf(filterValue) === 0);
   }
+
 
 }
